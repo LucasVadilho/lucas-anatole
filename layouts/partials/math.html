@@ -1,4 +1,4 @@
-{{- if or (eq site.Params.math true) (eq .Params.math true) -}}
+{{- if eq site.Params.math.enable true -}}
     {{- $use := "katex" -}}
 
     {{- with site.Params.math -}}
@@ -8,8 +8,9 @@
     {{- end -}}
 
     {{- if eq $use "mathjax" -}}
-        {{- $url := "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS-MML_HTMLorMML" -}}
-        {{- $hash := "sha384-e/4/LvThKH1gwzXhdbY2AsjR3rm7LHWyhIG5C0jiRfn8AN2eTN5ILeztWw0H9jmN" -}}
+        {{- $url := "https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.1.0/es5/tex-mml-svg.min.js" -}}
+        {{- $hash := "sha512-/mL9Gs6E5Bz6NtPOr9eY+T8IIdJbo2JL3TudApzFFelwBXEc3TeFLU6kPq122TJROv7jkktuBRkz5h8vGzrsyA==" -}}
+
         <script defer type="text/javascript" src="{{- $url -}}" integrity="{{- $hash -}}" crossorigin="anonymous"></script>
         <script
             type="text/x-mathjax-config">MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });</script>
