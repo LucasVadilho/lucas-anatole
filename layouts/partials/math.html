@@ -12,8 +12,7 @@
         {{- $hash := "sha512-/mL9Gs6E5Bz6NtPOr9eY+T8IIdJbo2JL3TudApzFFelwBXEc3TeFLU6kPq122TJROv7jkktuBRkz5h8vGzrsyA==" -}}
 
         <script defer type="text/javascript" src="{{- $url -}}" integrity="{{- $hash -}}" crossorigin="anonymous"></script>
-        <script
-            type="text/x-mathjax-config">MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });</script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });</script>
     {{- else -}}
         {{- $url := "https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" -}}
         {{- $hash := "sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" -}}
