@@ -1,4 +1,69 @@
-<div class="sidebar animated fadeInDown">
+<div class="sidebar">
+    <div class="top-toc">
+        <img src="{{ .Site.Params.profilePicture | absURL }}" alt="profile picture">
+        
+        <a href="/">{{ .Site.Params.Title }}</a>
+
+        <ul class="social-links hide">
+            {{ range $item := .Site.Params.socialIcons }}
+            <li>
+                <a href="{{ $item.url }}" rel="me" aria-label="{{ $item.title }}">
+                    <i class="fa {{ $item.icon }}" aria-hidden="true"></i>
+                </a>
+            </li>
+            {{ end }}
+        </ul>
+
+        <hr class="hide">
+    </div>
+    
+    <div class="middle-sidebar grow" id="middle-sidebar">
+    {{ if .Params.showToc }}
+        <div class="title-toc" id="title-toc">
+            <h3>{{ i18n "table_of_contents"}}</h3>
+        </div>                
+        {{/* Insert TOC from hugo
+            If the document was rendered by blogdown .TableOfContents is empty
+            TOC from blogdown is managed at sidebar-toc.js
+        */}}
+        {{ .TableOfContents }}
+    {{ else }}
+        <div class="description">
+            <p>{{ i18n "description" }}</p>
+        </div>
+    {{ end }}
+    </div>
+
+    <div class="footer">
+        <ul class="social-links">
+            {{ range $item := .Site.Params.socialIcons }}
+            <li>
+                <a href="{{ $item.url }}" rel="me" aria-label="{{ $item.title }}">
+                    <i class="fa {{ $item.icon }}" aria-hidden="true"></i>
+                </a>
+            </li>
+            {{ end }}
+        </ul>
+
+        <div class="by_farbox">&copy; {{ .Site.Params.author }} {{ now.Format "2006"}} </div>
+    </div>
+</div>
+
+<!-- {{ $js := resources.Get "js/sidebar-toc.js" }}
+{{ $secureJS := $js |  resources.Minify | resources.Fingerprint }}
+<script type="text/javascript" src="{{ $secureJS.Permalink }}" integrity="{{ $secureJS.Data.Integrity }}" crossorigin="anonymous" defer></script>
+
+<div id="sidebar" class="sidebar">
+    <div class="post-title">
+        <h3>{{ .Title }}</h3>
+        {{ if eq .Type "post"}}
+        <div class="info">
+          <i class="fa fa-sun-o"></i>
+          <span class="date">{{ .Date.Format "Mon, Jan 2, 2006" }}</span>
+          <i class="fa fa-clock-o"></i><span class="reading-time">{{ i18n "reading_time" .ReadingTime }}</span>
+        </div>
+        {{ end }}
+        </div>
     <div class="logo-title">
       <div class="title">
         <img src="{{ .Site.Params.profilePicture | absURL }}" alt="profile picture">
@@ -15,11 +80,10 @@
           <i class="fa fa-2x {{ $item.icon }}" aria-hidden="true"></i>
         </a>          
         </li>
-
         {{ end }}
     </ul>
     <div class="footer">
         <div class="by_farbox">&copy; {{ .Site.Params.author }} {{ now.Format "2006"}} </div>
       </div>
     </div>
-</div>
+</div> -->
