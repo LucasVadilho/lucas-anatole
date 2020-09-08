@@ -1,11 +1,3 @@
-// document.getElementById("sidebar").appendChild(document.getElementById("TOC"));
-// document.getElementById("TOC").className = "sidebar";
-// console.log(3);
-// $("#TOC").addClass("sidebar")
-// $(".post-title").addClass("sidebar")
-// document.getElementById("")
-//     console.log(document.readyState);
-
 document.onreadystatechange = function() {
     if(document.readyState !== "loading") { 
         // Move TOC from blogdown to middle-sidebar div
@@ -42,14 +34,3 @@ document.onreadystatechange = function() {
         }
     }
 }
-
-// }
-// if(document.readyState !== 'loading') {
-//     console.log(3);
-//     document.getElementById("sidebar").appendChild(document.getElementById("TOC"));
-// }
-
-// while(document.getElementById("sidebar-toc") == null){
-//     console.log(3);
-//     document.getElementById("sidebar-toc").appendChild(document.getElementById("TOC"));
-// }
