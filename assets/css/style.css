@@ -167,8 +167,8 @@ pre {
 /* Page Top */
 .page-top {
     width: 70%;
-    max-width: 720px;
-    left: 30%;
+    max-width: 720px;    
+    left: calc(30% + 20px);
     position: fixed;
     background-color: var(--bg-color);
     font-size: 1.25em;
@@ -184,7 +184,7 @@ pre {
 
     list-style: none;
     margin: 0;
-    padding-left: 30px;
+    padding: 0;
 }
 
 .page-top li {
