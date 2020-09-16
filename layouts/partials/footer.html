@@ -1,17 +1,22 @@
 </body>
 
+<!-- jQuery -->
 {{ $js := resources.Get "js/jquery.js" }}
 {{ $secureJS := $js |  resources.Minify | resources.Fingerprint }}
-<script type="text/javascript" src="{{ $secureJS.Permalink }}" integrity="{{ $secureJS.Data.Integrity }}" crossorigin="anonymous"></script>
+<script type="text/javascript" src="{{ $secureJS.Permalink }}" integrity="{{ $secureJS.Data.Integrity }}"
+    crossorigin="anonymous"></script>
 
+<!-- Migrate / appear -->
 {{ $migrate := resources.Get "js/jquery-migrate.js" }}
-
 {{ $appear := resources.Get "js/jquery-appear.js" }}
-
 {{ $js := slice $migrate $appear | resources.Concat "js/bundle.js" }}
-
 {{ $secureJS := $js |  resources.Minify | resources.Fingerprint }}
-<script type="text/javascript" src="{{ $secureJS.Permalink }}" integrity="{{ $secureJS.Data.Integrity }}" crossorigin="anonymous"></script>
+<script type="text/javascript" src="{{ $secureJS.Permalink }}" integrity="{{ $secureJS.Data.Integrity }}"
+    crossorigin="anonymous"></script>
+
+<!-- Font-awesome -->
+<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+    integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
 {{- partial "medium-zoom.html" . -}}
 {{- partial "math.html" . -}}

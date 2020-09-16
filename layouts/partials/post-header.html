@@ -1,0 +1,5 @@
+<div class="post-header">
+    <i class="fa fa-sun-o"></i><span class="date">{{ .Date.Format "Jan 2, 2006" }}</span>
+    <i class="fa fa-clock-o"></i><span class="reading-time">{{ i18n "reading_time" .ReadingTime }}</span>
+    {{ partial "listLanguages" . }}
+</div>

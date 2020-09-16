@@ -1,46 +1,52 @@
 {{ define "main" }}
 {{ $paginator := .Paginate (where .Site.RegularPages "Type" "in" .Site.Params.mainSections) }}
 {{ range $paginator.Pages }}
-    <div class="post">
-        <div class="post-title">
-            <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
-        </div>
-        <div class="post-content">
-            <div class="p_part">
-                {{ if (isset .Params "Summary") }}
-                    <p>{{ .Params.Summary }} </p>
-                {{ else }}
-                    <p>{{ .Summary }}</p>
-                {{ end }}
+    {{ $thumbnail := .Params.thumbnail }}
+    <div class="post summary">
+        <div class="post-text grow">
+            <div class="post-title">
+                <h5><a href="{{ .RelPermalink }}">{{ .Title }}</a></h5>
             </div>
-            <div class="p_part">
-                <p></p>
-            </div>
-        </div>
-        <div class="post-footer">
-            <div class="meta">
-                <div class="info">
-                    <i class="fa fa-sun-o"></i><span class="date">{{ .Date.Format "Jan 2, 2006" }}</span>
-
-                    {{ with .Params.categories }}
-                        {{- range $index, $el := . -}}
-                            <a class="category" href="{{ ( printf "categories/%s/" ( . | urlize ) ) | relLangURL }}">{{ . }}</a>
-                        {{- end -}}
-                    {{ end }}
-
-                    {{ with .Params.tags }}
-                        {{- range $index, $el := . -}}
-                            <a class="tag" href="{{ ( printf "tags/%s/" ( . | urlize ) ) | relLangURL }}">{{ . }}</a>
-                        {{- end -}}
+            {{ partial "post-header" . }}
+            <div class="post-content">
+                <div class="p_part">
+                    {{/*
+                        When blogdown exports TOC it shows in the summary
+                        so, if you're using .rmd or .rmarkdown and outputing TOC
+                        you need the summary in the frontmatter 
+                    */}}
+                    {{ if (isset .Params "Summary") }}
+                        <p>{{ .Params.Summary }} </p>
+                    {{ else }}
+                        <p>{{ .Summary }}</p>
                     {{ end }}
                 </div>
             </div>
+            <div class="post-footer">
+                <div class="meta">
+                    <div class="info">
+                        {{ with .Params.categories }}
+                            {{- range $index, $el := . -}}
+                                <a class="category" href="{{ ( printf "categories/%s/" ( . | urlize ) ) | relLangURL }}">{{ . }}</a>
+                            {{- end -}}
+                        {{ end }}
+                        {{ with .Params.tags }}
+                            {{- range $index, $el := . -}}
+                                <a class="tag" href="{{ ( printf "tags/%s/" ( . | urlize ) ) | relLangURL }}">{{ . }}</a>
+                            {{- end -}}
+                        {{ end }}
+                    </div>
+                </div>
+            </div>
         </div>
+        {{ if $thumbnail }}
+            <div class="thumbnail">
+                <img src="{{ $thumbnail | absURL }}" loading="lazy">
+            </div>
+        {{ end }}
     </div>
 {{ end }}
-
 <div class="pagination">
     {{ template "_internal/pagination.html" . }}
 </div>
-
 {{ end }}

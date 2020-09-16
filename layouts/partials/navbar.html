@@ -5,20 +5,21 @@
         <span aria-hidden="true"></span>
       </a>
     <ul class="nav" id="navMenu">
-        {{ $url := .RelPermalink }}
+        {{ $currentPage := . }}
         {{ range .Site.Menus.main }}
-        {{ $active := eq $url .URL }}
-        <li><a {{if $active }}class="current"{{end}} href="{{ .URL }}" {{ if strings.HasPrefix .URL "http" }}target="_blank" rel="noopener noreferrer" {{ end }} title="{{ .Title }}">{{ .Name }}</a></li>
+            {{ $isCurrent := eq (.URL | relLangURL) $currentPage.RelPermalink }}
+            <li><a {{ if $isCurrent }} class="current"{{end}} href="{{ .URL | relLangURL}}" {{ if strings.HasPrefix .URL "http" }}target="_blank" rel="noopener noreferrer" {{ end }} title="{{ .Title }}">{{ .Name }}</a></li>
         {{ end }}
+        <li class="grow"></li>
         {{ if .Site.IsMultiLingual }}
-            {{ range $.Site.Home.AllTranslations }}
-            <li><a href="{{ .Permalink }}" title="{{ .Language.LanguageName }}">{{ .Language.LanguageName }}</a></li>
+            {{ range $.Site.Home.Translations }}
+                <li><a href="{{ .Permalink }}" title="{{ .Language.LanguageName }}">{{ .Language.LanguageName }}</a></li>
             {{ end }}
         {{ end }}
-        <li class="theme-switch-item">
-        <a class="theme-switch" title="Switch Theme">
-            <i class="fa fa-adjust fa-fw" aria-hidden="true"></i>
-        </a>
+        <li>
+            <a class="theme-switch" title="Switch Theme">
+                <i class="fa fa-adjust fa-fw" aria-hidden="true"></i>
+            </a>
         </li>
     </ul>
 </div>
