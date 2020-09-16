@@ -8,19 +8,20 @@
     <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
     <meta name="description" content="{{ .Site.Params.description }}">
     
+    <!-- Styles -->
     {{ $style := resources.Get "css/style.css" | resources.Minify | resources.Fingerprint }}
-    <link rel="stylesheet" href="{{ $style.Permalink }}" integrity="{{ $style.Data.Integrity }}" crossorigin="anonymous" type="text/css">
+    <link rel="stylesheet" type="text/css" href="{{ $style.Permalink }}" integrity="{{ $style.Data.Integrity }}" crossorigin="anonymous" type="text/css" defer>
     
+    <!-- Computer Modern Font -->
+    {{ $fonts := resources.Get "css/fonts.css" | resources.Fingerprint }}
+    <link rel="stylesheet" type="text/css" href="{{ $fonts.Permalink }}" integrity="{{ $fonts.Data.Integrity }}" crossorigin="anonymous">
+
+    <!-- Custom css -->
     {{- $css := "" -}}
     {{- range .Site.Params.customCss -}}
         {{ $css := resources.Get . | fingerprint }}
-        <link rel="stylesheet" href="{{ $css.Permalink }}" integrity="{{ $css.Data.Integrity }}" crossorigin="anonymous" type="text/css">
+        <link rel="stylesheet" href="{{ $css.Permalink }}" integrity="{{ $css.Data.Integrity }}" crossorigin="anonymous" type="text/css" defer>
     {{- end -}}
-    
-    <!-- Font-awesome -->
-    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-    
-    <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/dreampulse/computer-modern-web-font/master/fonts.css">
     
     <!-- Favicons -->
     <link rel="shortcut icon" href="{{ .Site.Params.favicon | absURL }}favicon.ico" type="image/x-icon">
@@ -31,7 +32,8 @@
     {{ with .OutputFormats.Get "rss" -}}
         {{ printf `<link rel="%s" type="%s" href="%s" title="%s" />` .Rel .MediaType.Type .Permalink $.Site.Title | safeHTML }}
     {{ end -}}
-    
+
+    <!-- Anatole header -->
     {{ $anatole := resources.Get "js/anatole-header.js" }}
     {{ $secureJS := $anatole |  resources.Minify | resources.Fingerprint }}
     <script type="text/javascript" src="{{ $secureJS.Permalink }}" integrity="{{ $secureJS.Data.Integrity }}" crossorigin="anonymous"></script>
@@ -39,12 +41,13 @@
     <!-- Sidebar with TOC -->
     {{ $js := resources.Get "js/sidebar-toc.js" }}
     {{ $secureJS := $js |  resources.Minify | resources.Fingerprint }}
-    <script type="text/javascript" src="{{ $secureJS.Permalink }}" integrity="{{ $secureJS.Data.Integrity }}" crossorigin="anonymous"></script>
-
+    <script type="text/javascript" src="{{ $secureJS.Permalink }}" integrity="{{ $secureJS.Data.Integrity }}" crossorigin="anonymous" defer></script>
+    
+    <!-- Custom JS -->
     {{- $js := "" -}}
     {{- range .Site.Params.customJs -}}
         {{- if or (in . "http://") (in . "https://") -}}
-            <script src="{{ . | relURL }}"></script>
+            <script src="{{ . | relURL }}" defer></script>
         {{- else -}}
             {{- $customJS := resources.Get . -}}
             {{- if $customJS -}}
@@ -59,7 +62,7 @@
 
     {{- if ne $js "" -}}
         {{- $secureJS := $js |  resources.Minify | resources.Fingerprint -}}
-        <script type="text/javascript" src="{{ $secureJS.Permalink }}" integrity="{{ $secureJS.Data.Integrity }}" crossorigin="anonymous"></script>
+        <script type="text/javascript" src="{{ $secureJS.Permalink }}" integrity="{{ $secureJS.Data.Integrity }}" crossorigin="anonymous" defer></script>
     {{- end -}}
 
     <!-- Twitter Cards -->
