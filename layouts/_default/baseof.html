@@ -4,11 +4,11 @@
     <body>
         <div class="main">
             {{ partial "navbar.html" . }}
-            {{- partial "sidebar.html" . -}}
+            {{ partial "sidebar.html" . }}
             <div class="content">
                 {{- block "main" . }}{{- end }}
             </div>
         </div>
-        {{- partial "footer.html" . -}}
+        {{ partial "footer.html" . }}
     </body>
 </html>

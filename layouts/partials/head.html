@@ -10,28 +10,18 @@
     
     <!-- Styles -->
     {{ $style := resources.Get "css/style.css" | resources.Minify | resources.Fingerprint }}
-    <link rel="stylesheet" type="text/css" href="{{ $style.Permalink }}" integrity="{{ $style.Data.Integrity }}" crossorigin="anonymous" type="text/css" defer>
+    <link rel="stylesheet" type="text/css" href="{{ $style.Permalink }}" integrity="{{ $style.Data.Integrity }}" crossorigin="anonymous" type="text/css">
     
-    <!-- Computer Modern Font -->
-    {{ $fonts := resources.Get "css/fonts.css" | resources.Fingerprint }}
-    <link rel="stylesheet" type="text/css" href="{{ $fonts.Permalink }}" integrity="{{ $fonts.Data.Integrity }}" crossorigin="anonymous">
-
     <!-- Custom css -->
     {{- $css := "" -}}
     {{- range .Site.Params.customCss -}}
         {{ $css := resources.Get . | fingerprint }}
-        <link rel="stylesheet" href="{{ $css.Permalink }}" integrity="{{ $css.Data.Integrity }}" crossorigin="anonymous" type="text/css" defer>
+        <link rel="stylesheet" href="{{ $css.Permalink }}" integrity="{{ $css.Data.Integrity }}" crossorigin="anonymous" type="text/css">
     {{- end -}}
     
-    <!-- Favicons -->
-    <link rel="shortcut icon" href="{{ .Site.Params.favicon | absURL }}favicon.ico" type="image/x-icon">
-    <link rel="apple-touch-icon" sizes="180x180" href="{{ .Site.Params.favicon | absURL }}apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="{{ .Site.Params.favicon | absURL }}favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ .Site.Params.favicon | absURL }}favicon-16x16.png">
-    <link rel="canonical" href="{{ .Permalink }}">
-    {{ with .OutputFormats.Get "rss" -}}
-        {{ printf `<link rel="%s" type="%s" href="%s" title="%s" />` .Rel .MediaType.Type .Permalink $.Site.Title | safeHTML }}
-    {{ end -}}
+    <!-- Computer Modern Font -->
+    {{ $fonts := resources.Get "css/fonts.css" | resources.Fingerprint }}
+    <link rel="stylesheet" type="text/css" href="{{ $fonts.Permalink }}" integrity="{{ $fonts.Data.Integrity }}" crossorigin="anonymous">
 
     <!-- Anatole header -->
     {{ $anatole := resources.Get "js/anatole-header.js" }}
@@ -41,13 +31,23 @@
     <!-- Sidebar with TOC -->
     {{ $js := resources.Get "js/sidebar-toc.js" }}
     {{ $secureJS := $js |  resources.Minify | resources.Fingerprint }}
-    <script type="text/javascript" src="{{ $secureJS.Permalink }}" integrity="{{ $secureJS.Data.Integrity }}" crossorigin="anonymous" defer></script>
+    <script type="text/javascript" src="{{ $secureJS.Permalink }}" integrity="{{ $secureJS.Data.Integrity }}" crossorigin="anonymous"></script>
+
+    <!-- Favicons -->
+    <link rel="shortcut icon" href="{{ .Site.Params.favicon | absURL }}favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ .Site.Params.favicon | absURL }}apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ .Site.Params.favicon | absURL }}favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ .Site.Params.favicon | absURL }}favicon-16x16.png">
+    <link rel="canonical" href="{{ .Permalink }}">
+    {{ with .OutputFormats.Get "rss" -}}
+        {{ printf `<link rel="%s" type="%s" href="%s" title="%s" />` .Rel .MediaType.Type .Permalink $.Site.Title | safeHTML }}
+    {{ end -}}
     
     <!-- Custom JS -->
     {{- $js := "" -}}
     {{- range .Site.Params.customJs -}}
         {{- if or (in . "http://") (in . "https://") -}}
-            <script src="{{ . | relURL }}" defer></script>
+            <script src="{{ . | relURL }}"></script>
         {{- else -}}
             {{- $customJS := resources.Get . -}}
             {{- if $customJS -}}
@@ -62,7 +62,7 @@
 
     {{- if ne $js "" -}}
         {{- $secureJS := $js |  resources.Minify | resources.Fingerprint -}}
-        <script type="text/javascript" src="{{ $secureJS.Permalink }}" integrity="{{ $secureJS.Data.Integrity }}" crossorigin="anonymous" defer></script>
+        <script type="text/javascript" src="{{ $secureJS.Permalink }}" integrity="{{ $secureJS.Data.Integrity }}" crossorigin="anonymous"></script>
     {{- end -}}
 
     <!-- Twitter Cards -->
