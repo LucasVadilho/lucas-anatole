@@ -1,7 +1,6 @@
 {{ define "main" }}
 {{ $paginator := .Paginate (where .Site.RegularPages "Type" "in" .Site.Params.mainSections) }}
 {{ range $paginator.Pages }}
-    {{ $thumbnail := .Params.thumbnail }}
     <div class="post summary">
         <div class="post-text grow">
             <div class="post-title">
@@ -39,9 +38,9 @@
                 </div>
             </div>
         </div>
-        {{ if $thumbnail }}
+        {{ with .Params.thumbnail }}
             <div class="thumbnail">
-                <img src="{{ $thumbnail | absURL }}" loading="lazy">
+                <img src="{{ .src | absURL }}" alt="{{ .alt | default "" }}" loading="lazy">
             </div>
         {{ end }}
     </div>
