@@ -1,18 +1,18 @@
 @charset "UTF-8";
 
 :root {
-    --bg-color: #D2D4D2;
-    --secondary-bg-color: #F2F4F1;
+    --bg-color: #F2F2F4;
+    --secondary-bg-color:#FFF;
     --heading-color: #000000;
     --body-color: rgba(0, 0, 0, 0.9);
     --post-color: rgba(0, 0, 0, 0.44);
-    --border-color: rgba(0, 0, 0, 0.15);
+    --border-color: #009FE3;
     --pre-bg-color: #eee;
     --nav-text-color: #5a5a5a;
     --tag-color: #222222;
     --blockquote-text-color: #585858;
-    --blockquote-border-color: #7d8b99;
-    --a-color: #009FE3; /* rgb(227, 100, 241); */
+    --blockquote-border-color: #009FE3;
+    --a-color: #009FE3;
     --secondary-a-color: #006996;
     --thumbnail-size: 150px;
     scroll-padding-top: 100px;
@@ -24,12 +24,12 @@ html[data-theme='dark'] {
     --heading-color: rgb(169, 169, 179);
     --body-color: rgba(255, 255, 255, 0.75);
     --post-color: rgba(0, 0, 0, 0.44);
-    --border-color: rgb(100, 100, 100);
+    --border-color: #009FE3;
     --pre-bg-color: #292a2d;
     --nav-text-color: rgb(191, 191, 191);
     --tag-color: rgb(228, 228, 228);
     --blockquote-text-color: #a0a0a0;
-    --blockquote-border-color: #424242;
+    --blockquote-border-color: #009FE3;
 }
 
 html {
@@ -116,7 +116,7 @@ hr {
 /* Layout */
 .main {
     display: grid;
-    grid-template-columns: minmax(300px, 30%) minmax(0, 750px);
+    grid-template-columns: 350px minmax(0, 900px);
     grid-template-rows: 60px auto;
     grid-template-areas:
         "sidebar page-top"
@@ -131,14 +131,9 @@ hr {
 
 .page-top {
     grid-area: page-top;
-    position: sticky;
-    top: 0;
-    z-index: 1;
-    max-width: 750px;
     background-color: var(--bg-color);
-    font-variant: small-caps;  
-    border-bottom: 1px solid var(--border-color);
-    box-sizing: border-box;
+    font-variant: small-caps;
+    z-index: 1;
 }
 
 .sidebar {
@@ -149,9 +144,7 @@ hr {
     display: flex;
     flex-direction: column;
     background-color: var(--secondary-bg-color);
-    border-left: 1px solid var(--border-color);
-    border-right: 1px solid var(--border-color);
-    box-sizing: border-box;
+    box-shadow: 0px 4px 12px -5px black;
 }
 
 .content {
@@ -170,10 +163,9 @@ hr {
 
 /* Post Footer */
 .category {
-    padding: 6px 6px;
+    padding: 6px;
+    background-color: var(--secondary-bg-color);
     border-radius: 3px;
-    color: var(--tag-color);
-    background-color: var(--bg-color);
     border: 1px solid var(--border-color);
 }
 
@@ -385,13 +377,11 @@ pre {
 }
 
 .post {
-    width: 100%;
-    max-width: 750px;
     margin-bottom: 20px;
     padding: 20px;
     background-color: var(--secondary-bg-color);
     box-sizing: border-box;
-    border: 1px solid var(--border-color);
+    box-shadow: 0px 4px 12px -5px black;
 }
 
 .post-title h1, .post-title h5{
@@ -419,24 +409,8 @@ pre {
     color: #bbbbbb;
 }
 
-.post .post-footer .meta .info {
-    float: left;
-    font-size: 12px;
-    margin-bottom: 1em;
-    color: var(--body-color);
-}
-
 .post .post-footer .info .separator a {
     margin-right: 0.2em;
-}
-
-.post .post-footer .meta .info .date {
-    margin-right: 10px;
-}
-
-.info {
-    margin-top: 1em;
-    margin-bottom: 1em;
 }
 
 .post .post-footer .tags {
@@ -468,8 +442,7 @@ pre {
 }
 
 .pagination {
-    margin: 30px;
-    padding: 0px 0 56px 0;
+    margin: 20px;
     text-align: center;
 }
 
@@ -477,7 +450,6 @@ pre {
     list-style: none;
     margin: 0;
     padding: 0;
-    height: 13px;
 }
 
 .pagination ul li {
@@ -486,9 +458,8 @@ pre {
     line-height: 1;
 }
 
-.pagination ul li a {
-    text-decoration: none;
-    color: var(--body-color);
+.pagination .active {
+    font-weight: bold;
 }
 
 .pagination .pre {
@@ -497,6 +468,11 @@ pre {
 
 .pagination .next {
     float: right;
+}
+
+.built-with {
+    text-align: center;
+    padding: 15px 0;
 }
 
 .like-reblog-buttons {
@@ -872,7 +848,7 @@ a.btn {
     }        
 }
 
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 950px) {
     /* Layout */
     .main {
         display: grid;
@@ -891,16 +867,14 @@ a.btn {
     }
 
     .sidebar {
-        max-width: 750px;
         width: 100%;
         position: static;
         height: auto;
         background-color: var(--bg-color);
-        border-left: 0;
-        border-right: 0;
         border-bottom: 1px solid;
         border-image-width: 80px;
         border-image: repeating-linear-gradient( to right,transparent,var(--a-color),transparent) 10;
+        box-shadow: 0 0 black;
     }
 
     /* .content {
