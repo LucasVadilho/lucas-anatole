@@ -1,35 +1,35 @@
 @charset "UTF-8";
 
 :root {
-    --bg-color: #F2F2F4;
-    --secondary-bg-color:#FFF;
-    --heading-color: #000000;
-    --body-color: rgba(0, 0, 0, 0.9);
-    --post-color: rgba(0, 0, 0, 0.44);
+    /* Common between themes */
     --border-color: #009FE3;
-    --pre-bg-color: #eee;
-    --nav-text-color: #5a5a5a;
-    --tag-color: #222222;
-    --blockquote-text-color: #585858;
     --blockquote-border-color: #009FE3;
-    --a-color: #009FE3;
-    --secondary-a-color: #006996;
+    --code-color: #f8f8f2;
+    --code-bg-color: #505050a1;
     --thumbnail-size: 150px;
-    scroll-padding-top: 100px;
+
+    /* Theme specific */
+    --bg-color: #F8F8FF;
+    --secondary-bg-color:#F2F2F4;
+    --body-color: rgba(0, 0, 0, 0.9);
+    --post-color: rgba(51, 38, 38, 0.44);
+    --heading-color: #000;
+    --blockquote-text-color: #585858;
+    --tag-color: #0053b9;
+    --active-tag-color: #003679;
+    --a-color: #009FE3;
 }
 
 html[data-theme='dark'] {
     --bg-color: #292a2d;
     --secondary-bg-color: #2c2d32;
-    --heading-color: rgb(169, 169, 179);
     --body-color: rgba(255, 255, 255, 0.75);
     --post-color: rgba(0, 0, 0, 0.44);
-    --border-color: #009FE3;
-    --pre-bg-color: #292a2d;
-    --nav-text-color: rgb(191, 191, 191);
-    --tag-color: rgb(228, 228, 228);
+    --heading-color: rgb(169, 169, 179);
     --blockquote-text-color: #a0a0a0;
-    --blockquote-border-color: #009FE3;
+    --tag-color: #50c7ff;
+    --active-tag-color: #a4def9;
+    --a-color: #50c7ff;
 }
 
 html {
@@ -56,23 +56,25 @@ a {
 
 a:link,
 a:visited {
-    color: var(--tag-color);
+    color: var(--body-color);
 }
 
 a:hover {
-    color: var(--a-color);
+    color: var(--tag-color);
     cursor: pointer;
 	transition: all 0.3s ease-in-out;
 }
 
 a:active {
-    color: var(--secondary-a-color);
+    color: var(--active-tag-color);
 }
 
 h1, h2, h3, h4, h5, h6{
     font-variant: small-caps;
     font-weight: normal;
     letter-spacing: 0.1em;
+    margin-block-start: 20px;
+    margin-block-end: 20px;
 }
 
 h1 {
@@ -99,18 +101,68 @@ h6 {
     font-size: 1.15em;
 }
 
+code {
+    padding: .1rem .3rem .2rem;
+    border-radius: .3rem;
+    color: var(--code-color);
+    background-color: var(--code-bg-color);
+    white-space: nowrap;
+}
+
+pre {
+    background-color: #282a36;
+    padding: .75rem;
+    border-radius: .5em;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, .25);
+}
+
+pre>code {
+    white-space: pre-wrap;
+    background-color: inherit;
+    box-shadow: 0 0 black;
+    padding: 0;
+}
+
 blockquote {
     padding: 0 1em;
     border-left: .25em solid var(--blockquote-border-color);
     color: var(--blockquote-text-color);
     font-style: italic;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, .25);
+}
+
+table {
+    width: 100%;
+    border-radius: .25em;
+    border-spacing: 0;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, .25);
+    overflow: hidden;
+}
+
+td, th {
+    padding: 0.5em;
+    text-align: left;
+}
+
+thead {
+    background-color: var(--code-bg-color);
+    color: var(--code-color);
+    font-variant: small-caps;
+}
+
+tbody tr:nth-child(2n) {
+    background-color: var(--secondary-bg-color);
+}
+
+tbody tr:hover {
+    color: var(--a-color);
 }
 
 hr {
     width: 90%;
     border: 0;
     height: 1px;
-    background-image: linear-gradient(to right, var(--secondary-bg-color), var(--a-color), var(--secondary-bg-color));
+    background-image: linear-gradient(to right, var(--bg-color), var(--a-color), var(--bg-color));
 }
 
 /* Layout */
@@ -124,6 +176,7 @@ hr {
     column-gap: 20px;
     row-gap: 20px;
     width: fit-content;
+    width: -moz-fit-content;
     margin: auto;
     padding-left: 20px;
     padding-right: 20px;
@@ -143,12 +196,15 @@ hr {
     top: 0;
     display: flex;
     flex-direction: column;
-    background-color: var(--secondary-bg-color);
-    box-shadow: 0px 4px 12px -5px black;
+    background-color: var(--bg-color);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, .25);
 }
 
 .content {
     grid-area: content;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 /* Post Header */
@@ -164,7 +220,6 @@ hr {
 /* Post Footer */
 .category {
     padding: 6px;
-    background-color: var(--secondary-bg-color);
     border-radius: 3px;
     border: 1px solid var(--border-color);
 }
@@ -180,13 +235,6 @@ hr {
     font-size: 15px;
     line-height: 1;
     margin: 5px 8px 5px 0;
-}
-
-pre {
-    background-color: var(--pre-bg-color);
-    padding: 5px;
-    display: block;
-    overflow-x: auto;
 }
 
 .info i {
@@ -224,6 +272,11 @@ pre {
 }
 
 /* Sidebar */
+#sidebar-sketch {
+    height: 100%;
+    overflow: hidden;
+}
+
 .grow {
     flex-grow: 1;
 }
@@ -299,7 +352,8 @@ pre {
 }
 
 .title-toc {
-    padding-left: 25px;
+    padding-left: 20px;
+    padding-top: 20px;
 }
 
 .title-toc h6 {
@@ -309,7 +363,6 @@ pre {
 .middle-sidebar {
     flex-grow: 1;
     overflow: hidden;
-    margin: 30px 15px 0 0;
 }
 
 .middle-sidebar:hover {
@@ -331,7 +384,7 @@ pre {
 }
 
 #TOC ul, #TableOfContents ul {
-    padding-left: 25px;
+    padding-left: 20px;
 }
 
 #TOC a, #TableOfContents a {
@@ -347,6 +400,9 @@ pre {
 .summary {
     display: flex;
     justify-content: space-between;
+    background-color: var(--bg-color);
+    box-sizing: border-box;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, .25);
 }
 
 .summary .post-text {
@@ -379,9 +435,6 @@ pre {
 .post {
     margin-bottom: 20px;
     padding: 20px;
-    background-color: var(--secondary-bg-color);
-    box-sizing: border-box;
-    box-shadow: 0px 4px 12px -5px black;
 }
 
 .post-title h1, .post-title h5{
@@ -390,13 +443,13 @@ pre {
 }
 
 .post .post-content a {
-    text-decoration: none;
-    letter-spacing: 1px;
-    color: var(--a-color);
+    letter-spacing: 0.1em;
+    color: var(--tag-color)
 }
 
 .post .post-content a:hover {
-    color: #2F69B3;
+    text-decoration: underline;
+    letter-spacing: 0.1em;
 }
 
 .post .post-content img {
@@ -472,7 +525,7 @@ pre {
 
 .built-with {
     text-align: center;
-    padding: 15px 0;
+    margin: 20px 0;
 }
 
 .like-reblog-buttons {
@@ -864,6 +917,7 @@ a.btn {
     .page-top {
         margin: 0;
         width: 100%;
+        border-bottom: 0;
     }
 
     .sidebar {
@@ -887,7 +941,7 @@ a.btn {
         display: block;
     }
 
-    .copyright, .middle-sidebar {
+    .by, .middle-sidebar {
         display: none;
     }
 
@@ -913,7 +967,7 @@ a.btn {
 
     .page-top .nav {
         background-color: var(--bg-color);
-        box-shadow: 0 6px 6px rgba(10, 10, 10, .1);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, .25);
         padding: .5rem 0;
         width: 100%;
         display: none;

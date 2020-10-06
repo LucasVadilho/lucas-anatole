@@ -1,11 +1,36 @@
-baseURL = "https://example.com"
+title = "Heyo"
+theme = "lucas-anatole"
+baseURL = "/"
 languageCode = "en"
 DefaultContentLanguage = "en"
-title = "Website of Jane Doe"
-theme = "lucas-anatole"
-summarylength = 10
+summarylength = 100
 enableEmoji = true
 enableRobotsTXT = true
+paginate = 10
+showSketch = true
+
+[markup.goldmark.renderer]
+  unsafe= true
+
+[markup.tableOfContents]
+  endLevel = 6
+  startLevel = 2
+
+[markup.highlight]
+  anchorLineNos = false
+  codeFences = true
+  guessSyntax = false
+  hl_Lines = ""
+  lineAnchors = ""
+  lineNoStart = 1
+  lineNos = false
+  lineNumbersInTable = true
+  noClasses = true
+  style = "dracula"
+  tabWidth = 4
+
+# Hugo will ignore this files, .rmd and .rmarkdown are taken care by blogdown
+ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown", "_files$", "_cache$"]
 
 # Enable Disqus
 #disqusShortname = ""
@@ -14,32 +39,44 @@ enableRobotsTXT = true
 #googleAnalytics = "UA-123-45"
 
 [params]
-title = "I'm Jane Doe"
-author = "Jane Doe"
-description = "Call me Jane"
-profilePicture = "images/profile.jpg"
-keywords = ""
-favicon = "favicons/"
-customCss = []
-customJs = []
-mainSections = ["post"]
-images = ["images/site-feature-image.png"]
+  title = "I'm Jane Doe"
+  author = "Jane Doe"
+  description = "Call me Jane"
+  profilePicture = "images/profile.jpg"
+  keywords = ""
+  favicon = "favicons/"
+  customCss = []
+  customJs = []
+  mainSections = ["post"]
+  images = ["images/site-feature-image.png"]
+  showSketch = true
 
 ## Math settings
 [params.math]
-enable = false  # options: true, false. Enable math support globally, default: false. You can always enable math on per page.
-use = "katex"  # options: "katex", "mathjax". default is "katex".
+  enable = true # global support, you can use configure it per page
+  use = "mathjax" # katex or mathjax, default is mathjax
+
+[Languages]
+  [Languages.en]
+    contentDir = "content/en"
+    weight = 1
+    LanguageName = "en"
+
+  [Languages.pt-br]
+    contentDir = "content/pt-br"
+    weight = 2
+    LanguageName = "pt-br"
 
 ## Social links
 [[params.socialIcons]]
-icon = "fa-linkedin"
+icon = "fa-linkedin" # Font-awesome icon
 title = "Linkedin"
-url = "https://de.linkedin.com/"
+url = "https://linkedin.com/"
 
 [[params.socialIcons]]
 icon = "fa-github"
 title = "GitHub"
-url = "https://github.com/lxndrblz/anatole/"
+url = "https://github.com/lucasVadilho/lucas-anatole/"
 
 [[params.socialIcons]]
 icon = "fa-instagram"
@@ -49,26 +86,42 @@ url = "https://www.instagram.com/"
 [[params.socialIcons]]
 icon = "fa-envelope"
 title = "e-mail"
-url = "mailto:mail@alexbilz.com"
+url = "mailto:lucas.vadilho@gmail.com"
 
 ## Menu items
-
 [menu]
+[[Languages.en.menu.main]]
+name = "Home"
+identifier = "home"
+weight = 100
+url = "/"
 
-  [[menu.main]]
-  name = "Home"
-  identifier = "home"
-  weight = 100
-  url = "/"
+[[Languages.en.menu.main]]
+name = "Posts"
+weight = 200
+identifier = "posts"
+url = "/post/"
 
-  [[menu.main]]
-  name = "Posts"
-  weight = 200
-  identifier = "posts"
-  url = "/post/"
+[[Languages.en.menu.main]]
+name = "About"
+weight = 300
+identifier = "about"
+url = "/about/"
 
-  [[menu.main]]
-  name = "About"
-  weight = 300
-  identifier = "about"
-  url = "/about/"
+[[Languages.pt-br.menu.main]]
+name = "Home"
+identifier = "home"
+weight = 100
+url = "/pt-br/"
+
+[[Languages.pt-br.menu.main]]
+name = "Blog"
+weight = 200
+identifier = "posts"
+url = "/post/"
+
+[[Languages.pt-br.menu.main]]
+name = "Sobre"
+weight = 300
+identifier = "about"
+url = "/about/"

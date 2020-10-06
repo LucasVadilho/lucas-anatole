@@ -7,6 +7,7 @@
             {{ partial "sidebar.html" . }}
             <div class="content">
                 {{- block "main" . }}{{- end }}
+                <div class="grow"></div>
                 {{ partial "built-with.html" . }}
             </div>
         </div>
