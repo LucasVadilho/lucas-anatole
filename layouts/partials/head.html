@@ -1,5 +1,5 @@
 <head>
-    <title> {{.Site.Params.author}}{{ with .Title }} | {{ . }}{{ end }} </title>
+    <title>{{ with .Title }}{{ . }} · {{ end }}{{.Site.Params.author}}</title>
     <meta charset="utf-8">
     
     <!-- Hugo meta -->
@@ -29,8 +29,8 @@
     <script type="text/javascript" src="{{ $secureJS.Permalink }}" integrity="{{ $secureJS.Data.Integrity }}" crossorigin="anonymous"></script>
 
     <!-- Sidebar with TOC -->
-    {{ $js := resources.Get "js/sidebar-toc.js" }}
-    {{ $secureJS := $js |  resources.Minify | resources.Fingerprint }}
+    {{ $toc := resources.Get "js/sidebar-toc.js" }}
+    {{ $secureJS := $toc |  resources.Minify | resources.Fingerprint }}
     <script type="text/javascript" src="{{ $secureJS.Permalink }}" integrity="{{ $secureJS.Data.Integrity }}" crossorigin="anonymous"></script>
 
     <!-- Favicons -->

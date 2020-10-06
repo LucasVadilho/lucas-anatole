@@ -1,4 +1,4 @@
-<div class="sidebar">
+<div class="sidebar" id="sidebar">
     <div class="top-toc">
         <img src="{{ .Site.Params.profilePicture | absURL }}" alt="profile picture">
         
@@ -15,18 +15,20 @@
             TOC from blogdown is managed at sidebar-toc.js
         */}}
         {{ .TableOfContents }}
-    {{ else }}
-        <div class="description">
-            <p>{{ i18n "description" }}</p>
-        </div>
+    {{ else if site.Params.showSketch }}            
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/p5.min.js" defer></script>
+        {{ $sketch := resources.Get "js/sidebar-sketch.js" }}
+        {{ $secureJS := $sketch |  resources.Minify | resources.Fingerprint }}
+        <script type="text/javascript" src="{{ $secureJS.Permalink }}" integrity="{{ $secureJS.Data.Integrity }}" crossorigin="anonymous" defer></script>
+        <div id="sidebar-sketch"></div>
     {{ end }}
     </div>
 
     <div class="footer">
         <ul class="social-links">
-            {{ range $item := .Site.Params.socialIcons }}
+            {{ range $item := site.Params.socialIcons }}
             <li>
-                <a href="{{ $item.url }}" rel="me" aria-label="{{ $item.title }}">
+                <a href="{{ $item.url }}" target="_blank" rel="noopener noreferrer" rel="me" aria-label="{{ $item.title }}">
                     <i class="fa {{ $item.icon }}" aria-hidden="true"></i>
                 </a>
             </li>
